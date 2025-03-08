@@ -4,10 +4,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Danh sách môn học</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 8px;
+            border: 1px solid #ddd;
+        }
+        .btn-delete {
+            color: red;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
     <div>
         <h2>Danh sách các Môn học</h2>
+
+        <form id="subjectForm" action="/add-subject" method="POST">
+            <label for="tenMonHoc">Tên môn học:</label>
+            <input type="text" id="tenMonHoc" name="tenMonHoc" required>
+            <label for="loaiMonHoc">Loại môn học:</label>
+            <input type="text" id="loaiMonHoc" name="loaiMonHoc" required>
+            <label for="hocKy">Học kỳ:</label>
+            <input type="text" id="hocKy" name="hocKy" required>
+            <label for="khoa">Khoa:</label>
+            <input type="text" id="khoa" name="khoa" required>
+            <button type="submit">Thêm môn học</button>
+        </form>
+
         <table>
             <thead>
                 <tr>
@@ -16,9 +43,10 @@
                     <th>Loại môn học</th>
                     <th>Học kỳ</th>
                     <th>Khoa</th>
+                    <th>Thao tác</th>
                 </tr>
             </thead>
-            <tbody >
+            <tbody id="subjectTableBody">
                 <% data.forEach((subject) => { %>
                     <tr>
                         <td><%= subject.stt %></td>
@@ -26,11 +54,19 @@
                         <td><%= subject.loaiMonHoc %></td>
                         <td><%= subject.hocKy %></td>
                         <td><%= subject.khoa %></td>
+                        <td><button class="btn-delete" onclick="deleteRow(this)">Xóa</button></td>
                     </tr>
                 <% }); %>
             </tbody>
         </table>
     </div>
-    
+
+    <script>
+        // Hàm xóa dòng khi nhấn nút xóa
+        function deleteRow(button) {
+            const row = button.closest('tr');
+            row.remove();
+        }
+    </script>
 </body>
 </html>
