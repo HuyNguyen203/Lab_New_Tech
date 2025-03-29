@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="content">
+        <h2>Danh mục bài báo</h2>
+    </div>
+    <div class="container">
+        <table>
+            <thead>
+                <tr>STT</tr>
+                <tr>Tên bài báo</tr>
+                <tr>Tên nhóm tác giả</tr>
+                <tr>Chỉ số ISBN</tr>
+                <tr>Số trang</tr>
+                <tr>Năm xuất bản</tr>
+                <tr>Hình ảnh</tr>
+            </thead>
+        </table>
+        <tbody>
+            <% articles.forEach(item => { %>
+            <tr>
+                <td><%= item.id %></td>
+                <td><%= item.name %></td>
+                <td><%= item.author %></td>
+                <td><%= item.isbn %></td>
+                <td><%= item.page %></td>
+                <td><%= item.year %></td>
+                <td><img src="<%= item.image %>" alt="Image" style="max-width: 200px; height: auto;"></td>
+                <td>
+                    <form action="/delete" method="POST">
+                        <input type="hidden" name="id" value="<%= item.id %>">
+                        <button type="submit">Delete</button>
+                    </form>
+                </td>
+            </tr>
+            <% }); %>
+        </tbody>
+    </div>
+</body>
+</html>
